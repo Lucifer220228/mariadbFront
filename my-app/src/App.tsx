@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Student } from "./interface/Student";
 import { Seat } from "./interface/Seat";
-import { Timeslot } from "./interface/Timeslot";
+import { Timeslot } from "./interface/Timeslots";
 import { Reservation } from "./interface/Reservation";
 
 export default function App() {
