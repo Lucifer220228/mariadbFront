@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Student } from "./interface/Student";
+import { Seat } from "./interface/Seat";
+import { Timeslot } from "./interface/Timeslot";
+import { Reservation } from "./interface/Reservation";
 
 export default function App() {
-  const [students, setStudents] = useState([]);
-  const [seats, setSeats] = useState([]);
-  const [timeslots, setTimeslots] = useState([]);
-  const [reservations, setReservations] = useState([]);
+  const [students, setStudents] = useState<Student[]>([]);
+  const [seats, setSeats] = useState<Seat[]>([]);
+  const [timeslots, setTimeslots] = useState<Timeslot[]>([]);
+  const [reservations, setReservations] = useState<Reservation[]>([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3000/api/students").then((res: { data: any }) => setStudents(res.data));
-    axios.get("http://localhost:3000/api/seats").then((res: { data: any }) => setSeats(res.data));
-    axios.get("http://localhost:3000/api/timeslots").then((res: { data: any }) => setTimeslots(res.data));
-    axios.get("http://localhost:3000/api/reservations").then((res: { data: any }) => setReservations(res.data));
+    axios.get("http://localhost:3000/api/students").then((res: { data: Student[] }) => setStudents(res.data));
+    axios.get("http://localhost:3000/api/seats").then((res: { data: Seat[] }) => setSeats(res.data));
+    axios.get("http://localhost:3000/api/timeslots").then((res: { data: Timeslot[] }) => setTimeslots(res.data));
+    axios.get("http://localhost:3000/api/reservations").then((res: { data: Reservation[] }) => setReservations(res.data));
   }, []);
 
   return (
@@ -34,7 +38,7 @@ export default function App() {
         <ul>
           {reservations.map(r => (
             <li key={r.reservation_id}>
-              {r.student_name} 預約 {r.row_label}{r.seat_number} 時段 {r.start_time} - {r.end_time}
+              {r.student_id} 預約 {r.seat_id} 時段 {r.timeslot_id}
             </li>
           ))}
         </ul>
